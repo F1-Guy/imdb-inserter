@@ -4,7 +4,7 @@ namespace IMDB_Data_Inserter
 {
     static public class Reader
     {
-        static string path = @"C:\Users\barto\Documents\Programming\School\IMDB Data Inserter\Data\";
+        static string path = @"..\..\..\..\Data\";
 
         public static List<Title> GetTitles()
         {
