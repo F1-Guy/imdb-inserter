@@ -10,7 +10,7 @@ namespace IMDB_Data_Inserter
         {
             var list = new List<Title>();
 
-            foreach (string line in File.ReadLines(path + "title.basics.tsv").Take(100000)
+            foreach (string line in File.ReadLines(path + "title.basics.tsv")
                                         .Skip(1))
             {
                 string[] values = line.Split('\t');
