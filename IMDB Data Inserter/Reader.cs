@@ -81,8 +81,6 @@ namespace IMDB_Data_Inserter
                 }
             }
 
-            Console.WriteLine(list.Count);
-
             return list;
         }
 
