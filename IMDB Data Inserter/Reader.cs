@@ -2,9 +2,9 @@
 
 namespace IMDB_Data_Inserter
 {
-    static public class Reader
+    public static class Reader
     {
-        static string path = @"..\..\..\..\Data\";
+        private static readonly string path = @"..\..\..\..\Data\";
 
         public static List<Title> GetTitles()
         {
@@ -23,7 +23,7 @@ namespace IMDB_Data_Inserter
                         titleType = values[1],
                         primaryTitle = values[2],
                         originalTitle = values[3],
-                        isAdult = values[4] == "0" ? false : true,
+                        isAdult = values[4] != "0",
                         startYear = CheckInt(values[5]),
                         endYear = CheckInt(values[6]),
                         runtimeMinutes = CheckInt(values[7]),
@@ -84,23 +84,13 @@ namespace IMDB_Data_Inserter
             return list;
         }
 
-
-
-        // Fix this later
-        static int? CheckInt(string value)
+        private static int? CheckInt(string value)
         {
-            int beforeParse = 0;
+            bool canParse = int.TryParse(value, out int parsed);
 
-            int.TryParse(value, out beforeParse);
+            if (canParse) return parsed;
 
-            int? result = null;
-
-            if (beforeParse != 0)
-            {
-                result = beforeParse;
-            }
-
-            return result;
+            return null;
         }
     }
 }
