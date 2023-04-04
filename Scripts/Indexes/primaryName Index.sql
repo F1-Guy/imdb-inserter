@@ -1,0 +1,1 @@
+CREATE INDEX primaryName_index ON Names (primaryName)

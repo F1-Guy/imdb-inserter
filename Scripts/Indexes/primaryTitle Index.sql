@@ -1,0 +1,1 @@
+CREATE INDEX primaryTitle_index ON Titles (primaryTitles)

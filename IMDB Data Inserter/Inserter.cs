@@ -6,6 +6,9 @@ namespace IMDB_Data_Inserter
 {
     public class Inserter
     {
+        private const int timeout = 0;
+        private const int batchSize = 10000;
+
         public static void InsertTitles(SqlConnection connection, List<Title> titles)
         {
             DataTable titleTable = new("Titles");
@@ -50,29 +53,21 @@ namespace IMDB_Data_Inserter
                         genreTable.Rows.Add(row);
                     }
                 }
-                else
-                {
-                    DataRow row = genreTable.NewRow();
-                    row["id"] = DBNull.Value;
-                    row["genre"] = DBNull.Value;
-                    row["tconst"] = title.tconst;
-
-                    genreTable.Rows.Add(row);
-                }
             }
 
             SqlBulkCopy bulkTitles = new(connection, SqlBulkCopyOptions.KeepNulls, null)
             {
                 DestinationTableName = "Titles",
-                BatchSize = 10000,
-                BulkCopyTimeout = 0
+                BatchSize = batchSize,
+                BulkCopyTimeout = timeout
             };
             bulkTitles.WriteToServer(titleTable);
 
             SqlBulkCopy bulkGenres = new(connection, SqlBulkCopyOptions.KeepNulls, null)
             {
                 DestinationTableName = "Genres",
-                BulkCopyTimeout = 0
+                BatchSize = batchSize,
+                BulkCopyTimeout = timeout
             };
             bulkGenres.WriteToServer(genreTable);
 
@@ -140,21 +135,25 @@ namespace IMDB_Data_Inserter
             SqlBulkCopy bulkNames = new(connection, SqlBulkCopyOptions.KeepNulls, null)
             {
                 DestinationTableName = "Names",
-                BulkCopyTimeout = 0
+                BatchSize = batchSize,
+                BulkCopyTimeout = timeout
             };
             bulkNames.WriteToServer(nameTable);
 
-            using (SqlBulkCopy bulkKnownFor = new(connection, SqlBulkCopyOptions.KeepNulls, null))
+            SqlBulkCopy bulkKnownFor = new(connection, SqlBulkCopyOptions.KeepNulls, null)
             {
-                bulkKnownFor.DestinationTableName = "KnownForTitles";
-                bulkKnownFor.BulkCopyTimeout = 0;
-                bulkKnownFor.WriteToServer(knownForTable);
-            }
+                DestinationTableName = "KnownForTitles",
+                BatchSize = batchSize,
+                BulkCopyTimeout = timeout
+            };
+
+            bulkKnownFor.WriteToServer(knownForTable);
 
             SqlBulkCopy bulkProfessions = new(connection, SqlBulkCopyOptions.KeepNulls, null)
             {
                 DestinationTableName = "Professions",
-                BulkCopyTimeout = 0
+                BatchSize = batchSize,
+                BulkCopyTimeout = timeout
             };
             bulkProfessions.WriteToServer(professionTable);
 
@@ -207,7 +206,8 @@ namespace IMDB_Data_Inserter
             SqlBulkCopy bulkWriters = new(connection, SqlBulkCopyOptions.KeepNulls, null)
             {
                 DestinationTableName = "Writers",
-                BulkCopyTimeout = 0
+                BatchSize = batchSize,
+                BulkCopyTimeout = timeout
             };
             bulkWriters.WriteToServer(writerTable);
 
@@ -215,7 +215,8 @@ namespace IMDB_Data_Inserter
             SqlBulkCopy bulkDirectors = new(connection, SqlBulkCopyOptions.KeepNulls, null)
             {
                 DestinationTableName = "Directors",
-                BulkCopyTimeout = 0
+                BatchSize = batchSize,
+                BulkCopyTimeout = timeout
             };
             bulkDirectors.WriteToServer(directorTable);
 
