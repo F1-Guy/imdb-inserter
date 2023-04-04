@@ -54,7 +54,7 @@ FETCH NEXT FROM genreCursor INTO @genreName;
 WHILE @@FETCH_STATUS = 0
 BEGIN
 	INSERT INTO Genres (tconst, genre)
-	VALUES (@newTconst,  LTRIM(@genreName));
+	VALUES (@newTconst,  TRIM(@genreName));
 	FETCH NEXT FROM genreCursor INTO @genreName;
 END
 CLOSE genreCursor;

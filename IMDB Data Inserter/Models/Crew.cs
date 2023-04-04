@@ -3,9 +3,7 @@
     public class Crew
     {
         public string tconst { get; set; }
-
         public string[]? wconst { get; set; }
-
         public string[]? dconst { get; set; }
 
         public override string ToString()

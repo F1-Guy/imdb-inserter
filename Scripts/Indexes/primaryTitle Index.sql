@@ -1,1 +1,1 @@
-CREATE INDEX primaryTitle_index ON Titles (primaryTitles)
+CREATE INDEX primaryTitle_index ON Titles (primaryTitle)

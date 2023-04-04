@@ -129,7 +129,6 @@ namespace IMDB_Data_Inserter
                         professionTable.Rows.Add(row);
                     }
                 }
-
             }
 
             SqlBulkCopy bulkNames = new(connection, SqlBulkCopyOptions.KeepNulls, null)
@@ -146,7 +145,6 @@ namespace IMDB_Data_Inserter
                 BatchSize = batchSize,
                 BulkCopyTimeout = timeout
             };
-
             bulkKnownFor.WriteToServer(knownForTable);
 
             SqlBulkCopy bulkProfessions = new(connection, SqlBulkCopyOptions.KeepNulls, null)
@@ -186,8 +184,8 @@ namespace IMDB_Data_Inserter
 
                         writerTable.Rows.Add(row);
                     }
-
                 }
+
                 if (c.dconst != null)
                 {
                     foreach (var dconst in c.dconst)
@@ -200,7 +198,6 @@ namespace IMDB_Data_Inserter
                         directorTable.Rows.Add(row);
                     }
                 }
-
             }
 
             SqlBulkCopy bulkWriters = new(connection, SqlBulkCopyOptions.KeepNulls, null)

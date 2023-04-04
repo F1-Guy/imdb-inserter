@@ -3,8 +3,7 @@ using System.Data.SqlClient;
 
 Console.WriteLine("Connecting to database...");
 
-using (SqlConnection sqlConn = new SqlConnection(
-    "Server=localhost;Database=IMDB;User ID=user;Password=pass123;"))
+using (SqlConnection sqlConn = new("Server=localhost;Database=IMDB;User ID=user;Password=pass123;"))
 {
     sqlConn.Open();
     Console.WriteLine("Connection successful");
