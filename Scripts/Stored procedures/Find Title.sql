@@ -1,4 +1,4 @@
-CREATE PROCEDURE find_movie (@title VARCHAR(MAX))
+CREATE PROCEDURE findTitle (@title VARCHAR(MAX))
 AS
 BEGIN
     IF (@title IS NULL OR @title = '')

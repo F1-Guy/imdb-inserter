@@ -1,4 +1,4 @@
-CREATE PROCEDURE find_name (@name VARCHAR(MAX))
+CREATE PROCEDURE findName (@name VARCHAR(MAX))
 AS
 BEGIN
     IF (@name IS NULL OR @name = '')
