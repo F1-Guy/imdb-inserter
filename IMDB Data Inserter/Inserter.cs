@@ -7,7 +7,7 @@ namespace IMDB_Data_Inserter
     public class Inserter
     {
         private const int timeout = 0;
-        private const int batchSize = 10000;
+        private const int batchSize = 100000;
 
         public static void InsertTitles(SqlConnection connection, List<Title> titles)
         {
